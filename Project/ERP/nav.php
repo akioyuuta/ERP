@@ -13,7 +13,7 @@
                     </a>
                 </li>
                 <li <?php echo $page_name == "Customer" ? 'class="active"':''; ?>>
-                    <a href="#">
+                    <a href="customer.php">
                         <i class="ti-user"></i>
                         <p>Customer</p>
                     </a>
