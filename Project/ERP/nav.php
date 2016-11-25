@@ -19,7 +19,7 @@
                     </a>
                 </li>
                 <li <?php echo $page_name == "Product" ? 'class="active"':''; ?>>
-                    <a href="#">
+                    <a href="product.php">
                         <i class="ti-tag"></i>
                         <p>Product</p>
                     </a>
