@@ -3,7 +3,7 @@
   <bpmn:collaboration id="Collaboration_0rkbony">
     <bpmn:participant id="Participant_0itippo" name="Sales Order" processRef="Process_1" />
     <bpmn:participant id="Participant_0pps658" name="Customer" processRef="Process_0p1hzow" />
-    <bpmn:messageFlow id="MessageFlow_0lkxlwi" sourceRef="Task_087q5ox" targetRef="Task_17d56tr" />
+    <bpmn:messageFlow id="MessageFlow_0lkxlwi" sourceRef="Task_087q5ox" targetRef="SubProcess_13j2byh" />
     <bpmn:messageFlow id="MessageFlow_142ht77" sourceRef="Task_0jh4k7z" targetRef="Task_1uj6nwu" />
     <bpmn:messageFlow id="MessageFlow_16qt8rf" sourceRef="Task_1vebxfn" targetRef="Task_0ddnb6r" />
     <bpmn:messageFlow id="MessageFlow_08uqzla" sourceRef="Task_0auijcf" targetRef="Task_0u7tycf" />
@@ -12,13 +12,13 @@
   <bpmn:process id="Process_1" isExecutable="false">
     <bpmn:laneSet>
       <bpmn:lane id="Lane_1b6hlgg" name="Sales">
-        <bpmn:flowNodeRef>Task_17d56tr</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_0jh4k7z</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0ddnb6r</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0auijcf</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0u6g8vj</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_1okkyvi</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0jh4k7z</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SubProcess_13j2byh</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1p3in9s" name="Warehouse">
         <bpmn:flowNodeRef>Task_1km1h4z</bpmn:flowNodeRef>
@@ -29,19 +29,11 @@
         <bpmn:flowNodeRef>EndEvent_0a01wgi</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:sequenceFlow id="SequenceFlow_1qpcys7" sourceRef="StartEvent_1" targetRef="Task_17d56tr" />
+    <bpmn:sequenceFlow id="SequenceFlow_1qpcys7" sourceRef="StartEvent_1" targetRef="SubProcess_13j2byh" />
     <bpmn:startEvent id="StartEvent_1" name="Start">
       <bpmn:outgoing>SequenceFlow_1qpcys7</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:task id="Task_17d56tr" name="Konfirmasi Quotation">
-      <bpmn:incoming>SequenceFlow_1qpcys7</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1dxpqgv</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:task id="Task_0jh4k7z" name="Membuat dan Mengirim Quotation">
-      <bpmn:incoming>SequenceFlow_1dxpqgv</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1hp2yiq</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:sequenceFlow id="SequenceFlow_1dxpqgv" sourceRef="Task_17d56tr" targetRef="Task_0jh4k7z" />
+    <bpmn:sequenceFlow id="SequenceFlow_1dxpqgv" sourceRef="SubProcess_13j2byh" targetRef="Task_0jh4k7z" />
     <bpmn:task id="Task_0ddnb6r" name="Menerima Pesanan">
       <bpmn:incoming>SequenceFlow_1hp2yiq</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1qvo8gx</bpmn:outgoing>
@@ -97,6 +89,14 @@
     <bpmn:endEvent id="EndEvent_0a01wgi" name="End">
       <bpmn:incoming>SequenceFlow_0u8bs0s</bpmn:incoming>
     </bpmn:endEvent>
+    <bpmn:task id="Task_0jh4k7z" name="Membuat dan Mengirim Quotation">
+      <bpmn:incoming>SequenceFlow_1dxpqgv</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1hp2yiq</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:subProcess id="SubProcess_13j2byh" name="Konfirmasi Quotation">
+      <bpmn:incoming>SequenceFlow_1qpcys7</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1dxpqgv</bpmn:outgoing>
+    </bpmn:subProcess>
   </bpmn:process>
   <bpmn:process id="Process_0p1hzow">
     <bpmn:startEvent id="StartEvent_17twuv6" name="Start">
@@ -183,9 +183,6 @@
       <bpmndi:BPMNShape id="Participant_0pps658_di" bpmnElement="Participant_0pps658">
         <dc:Bounds x="-122" y="-144" width="1678" height="227" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_17d56tr_di" bpmnElement="Task_17d56tr">
-        <dc:Bounds x="14.49799999999999" y="141" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1qpcys7_di" bpmnElement="SequenceFlow_1qpcys7">
         <di:waypoint xsi:type="dc:Point" x="-21" y="181" />
         <di:waypoint xsi:type="dc:Point" x="14" y="181" />
@@ -216,9 +213,6 @@
           <dc:Bounds x="19" y="90" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Task_0jh4k7z_di" bpmnElement="Task_0jh4k7z">
-        <dc:Bounds x="162.498" y="141" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1dxpqgv_di" bpmnElement="SequenceFlow_1dxpqgv">
         <di:waypoint xsi:type="dc:Point" x="114" y="181" />
         <di:waypoint xsi:type="dc:Point" x="162" y="181" />
@@ -519,6 +513,12 @@
           <dc:Bounds x="1157" y="303" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Task_0jh4k7z_di" bpmnElement="Task_0jh4k7z">
+        <dc:Bounds x="162.498" y="141" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SubProcess_13j2byh_di" bpmnElement="SubProcess_13j2byh">
+        <dc:Bounds x="14" y="141" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
